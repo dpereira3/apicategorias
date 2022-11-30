@@ -20,7 +20,8 @@ class Categorias(db.Model):
         self.cat_nom = cat_nom
         self.cat_desp = cat_desp
 
-db.create_all()
+with app.app_context():
+    db.create_all()
 
 #Esquema Categorias
 class CategoriaSchema(ma.Schema):
