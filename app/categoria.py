@@ -1,10 +1,10 @@
 from flask import Flask,request,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql10549750:NldJytlJZC@sql10.freesqldatabase.com:3306/sql10549750?charset=utf8mb4'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLDATABASE_ENV')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
