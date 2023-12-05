@@ -3,4 +3,4 @@ Gunicorn
 Flask-SQLAlchemy
 flask-marshmallow
 marshmallow-sqlalchemy
-PyMySQL
+psycopg2
