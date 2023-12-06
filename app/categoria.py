@@ -1,10 +1,14 @@
 from flask import Flask,request,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS, cross_origin
 import os
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLDATABASE_ENV')
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///prueba.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -36,6 +40,7 @@ categorias_schema = CategoriaSchema(many=True)
 
 #GET
 @app.route('/categorias',methods=['GET'])
+@cross_origin()
 def get_categorias():
     all_categorias = Categorias.query.all()
     result = categorias_schema.dump(all_categorias)
@@ -43,12 +48,14 @@ def get_categorias():
 
 #GET X ID
 @app.route('/categoria/<id>',methods=['GET'])
+@cross_origin()
 def get_categoria_x_id(id):
     una_categoria = Categorias.query.get(id)
     return categoria_schema.jsonify(una_categoria)
 
 #POST
 @app.route('/categoria',methods=['POST'])
+@cross_origin()
 def insert_categoria():
     data = request.get_json(force=True)
     cat_nom = data['cat_nom']
@@ -61,6 +68,7 @@ def insert_categoria():
 
 #PUT
 @app.route('/categoria/<id>',methods=['PUT'])
+@cross_origin()
 def update_categoria(id):
     act_categoria = Categorias.query.get(id)
     data = request.get_json(force=True)
@@ -75,6 +83,7 @@ def update_categoria(id):
 
 #DELETE
 @app.route('/categoria/<id>',methods=['DELETE'])
+@cross_origin()
 def delete_categoria(id):
     del_categoria = Categorias.query.get(id)
     db.session.delete(del_categoria)
@@ -83,7 +92,7 @@ def delete_categoria(id):
 
 #Mensaje de Bienvenida
 @app.route('/',methods=['GET'])
-
+@cross_origin()
 def index():
     return jsonify({'Mensaje':'Bienvenido'})
 
