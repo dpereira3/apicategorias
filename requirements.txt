@@ -3,5 +3,6 @@ Gunicorn
 Flask-SQLAlchemy
 flask-marshmallow
 marshmallow-sqlalchemy
-mysqlclient
+pymysql
+cryptography
 flask-cors
