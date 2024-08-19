@@ -3,5 +3,5 @@ Gunicorn
 Flask-SQLAlchemy
 flask-marshmallow
 marshmallow-sqlalchemy
-psycopg2
+mysqlclient
 flask-cors
